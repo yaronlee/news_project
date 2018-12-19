@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashMap;
 
 @Controller
 public class NewsController {
@@ -23,24 +24,25 @@ public class NewsController {
 
     @RequestMapping("/user/addNews")
     @ResponseBody
-    public String addNews(HttpSession session,
-                          @RequestParam("image") String image,
-                          @RequestParam("title") String title,
-                          @RequestParam("link") String link,
-                          Model model){
+    public HashMap addNews(HttpSession session,
+                          News news){
+
+        HashMap map = new HashMap();
+
         User user = (User) session.getAttribute("user");
         if (user != null) {
+            news.setCommentCount(0);
+            news.setLikeCount(0);
+            news.setCreatedDate(new Date());
             String userId = user.getId();
-            Integer likeCount = 0;
-            Integer commentCount = 0;
-            Date createdDate = new Date();
-
-            News news = new News("0",image,title,link,
-                    likeCount,commentCount,createdDate,userId);
+            news.setUserId(userId);
             int update = newsService.insert(news);
+            map.put("code",0);
+        } else {
+            map.put("code",1);
+            map.put("msg","something went wrong");
         }
-
-        return "redirect:/home";
+        return map;
     }
 
 }

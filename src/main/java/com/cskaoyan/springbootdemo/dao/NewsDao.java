@@ -15,6 +15,8 @@ public interface NewsDao {
     List<News> findAllNews();
 
 
+    @Insert("insert into news (id, title,image,likecount,commentcount,createddate,userid)" +
+            "values (null,#{title},#{image},#{likeCount},#{commentCount},#{createdDate},#{userId})")
     Integer insert(News news);
 
 }

@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cskaoyan.springbootdemo.dao.NewsDao">
-    <select id="insert"   parameterType="news" resultType="Integer">
+   <!-- <select id="insert"   parameterType="news" resultType="Integer">
         insert into news (id, title,image,likecount,commentcount,createddate,userid)
         values (null,#{title},#{image},#{likeCount},#{commentCount},#{createdDate},#{userId})
-    </select>
+    </select>-->
 
 </mapper>
