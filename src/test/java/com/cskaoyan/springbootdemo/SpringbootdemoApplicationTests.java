@@ -5,6 +5,7 @@ import com.cskaoyan.springbootdemo.bean.User;
 import com.cskaoyan.springbootdemo.dao.NewsDao;
 import com.cskaoyan.springbootdemo.dao.UserDao;
 import com.cskaoyan.springbootdemo.service.NewsService;
+import org.apache.ibatis.annotations.Insert;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,7 +64,7 @@ public class SpringbootdemoApplicationTests {
 
 
     /**
-     * 为什么会出空指针异常？
+     * 用dao.xml文件实现，为什么会出空指针异常？
      */
     @Test
     public void insertNewsTest(){
@@ -81,6 +82,15 @@ public class SpringbootdemoApplicationTests {
         int insert = newsService.insert(news);
         System.out.println("insert = " + insert);
     }
+
+    @Test
+    public void insertUserTest(){
+        User user = new User();
+        user.setName("test");
+        user.setPassword("test");
+        Integer insert = userDao.insert(user);
+    }
+
 
 }
 

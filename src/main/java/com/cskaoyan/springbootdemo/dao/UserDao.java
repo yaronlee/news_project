@@ -2,6 +2,7 @@ package com.cskaoyan.springbootdemo.dao;
 
 
 import com.cskaoyan.springbootdemo.bean.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -25,5 +26,7 @@ public interface UserDao {
     //@Select("select * from user where username = #{username} and password = #{password}")
     User findUserByNameAndPassword(@Param("name") String name, @Param("password") String password);
 
+    @Insert("insert into user (id, name, password) values (null, #{name}, #{password})")
+    Integer insert(User user);
 
 }

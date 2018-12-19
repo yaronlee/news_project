@@ -10,6 +10,10 @@ public interface UserService {
 
     User findUserById(String id);
 
+    User findUserByName(String name);
+
     List<User> findAllUsers();
+
+    Integer insert(User user);
 
 }

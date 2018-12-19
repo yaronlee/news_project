@@ -24,8 +24,7 @@ public class NewsController {
 
     @RequestMapping("/user/addNews")
     @ResponseBody
-    public HashMap addNews(HttpSession session,
-                          News news){
+    public HashMap addNews(HttpSession session, News news){
 
         HashMap map = new HashMap();
 
