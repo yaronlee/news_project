@@ -55,8 +55,7 @@ public class NewsController {
 
     @RequestMapping("/news/{newsId}")
     public String newsDetail(@PathVariable String newsId,
-                             Model model,
-                             HttpSession session){
+                             Model model){
 
         //1，根据newsId找到对应的news，根据news找到对应的owner
         //2，根据newsId找到所有的comment，然后每个comment都设置一个vo
@@ -67,13 +66,13 @@ public class NewsController {
         //根据newsId找到所有的comments
         List<Comment> commentList = commentService.selectCommentsByNewsId(newsId);
         //创建comments，即List<CommentVO>
-        CommentVO commentVO = new CommentVO();
         List<CommentVO> comments = new ArrayList<>();
 
         String ownerId = news.getUserId();
         User owner = userService.findUserById(ownerId);
 
         for (Comment comment : commentList){
+            CommentVO commentVO = new CommentVO();
             commentVO.setComment(comment);
             commentVO.setUser(owner);
             comments.add(commentVO);
@@ -89,6 +88,14 @@ public class NewsController {
         return "detail";
     }
 
+    @RequestMapping("/addComment")
+    public String addComment(Comment comment, Model model){
 
+        comment.setCreatedDate(new Date());
+        commentService.insert(comment);
+
+        return "redirect:/news/" + comment.getNewsId();
+
+    }
 
 }
