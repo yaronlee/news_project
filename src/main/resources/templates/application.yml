@@ -1,0 +1,11 @@
+server:
+  servlet:
+    context-path: /hello
+  port: 8080
+
+dest: shenzhen
+from: shandong
+
+test:
+  dest: shenzhentest
+  from: shandongtest
